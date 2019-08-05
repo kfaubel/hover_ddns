@@ -1,10 +1,8 @@
 const axios = require('axios');
 const config = require("./config.json");
 
-const dnsId = "dns19334064";
-
 async function login() {
-    const url = "https://www.hover.com/api/login";
+    const baseUrl = "https://www.hover.com/api/";
     const params = {
         username: config.username,
         password: config.password,
@@ -12,7 +10,7 @@ async function login() {
     }
 
     let hoverauthCookie = "";
-    await axios.post(url, params)
+    await axios.post(baseUrl + "login", params)
     .then((response) => {
         // handle success
         //console.log(JSON.stringify(response.data, null, 4));
@@ -31,7 +29,7 @@ async function login() {
             const myIP = response.data;
             console.log("My IP: " + myIP);
 
-            axios.get("https://www.hover.com/api/dns", {
+            axios.get(baseUrl + "dns", {
                 headers: {
                     Cookie: hoverauthCookie
                 }
@@ -52,8 +50,7 @@ async function login() {
                             } else {
                                 console.log("entry: " + JSON.stringify(entry, null, 4));
                                 console.log("DNS for " + config.dnsId + " changed to: " + entry.content);
-                                const updateUrl = "https://www.hover.com/api/dns/" + config.dnsId;
-
+                                const updateUrl = baseUrl + "dns/" + config.dnsId;
 
                                 // https://www.hover.com/api/dns/dns3663904?content=64.98.145.30
                                 // https://www.hover.com/api/dns/dns19334064?content=199.4.160.88
