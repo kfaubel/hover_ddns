@@ -7,14 +7,18 @@ const log4js = require('log4js');
 log4js.configure({
     appenders: { 
         "out": { type: 'stdout' },
-        "file": { type: 'file', filename: 'hover-ddns.log' } },
-    categories: { default: { appenders: ['out', 'file'], level: 'warn' } }
+        "file": { type: 'file', filename: config.logfile } },
+    categories: { 
+        default: { 
+            appenders: ['out', 'file'], 
+            level: 'warn' 
+        } 
+    }
 });
 
-const logger = log4js.getLogger('cheese');
+const logger = log4js.getLogger('hover-ddns');
 
-
-async function login() {
+async function update() {
     const baseUrl    = "https://www.hover.com/api/";
     const ipQueryUrl = "https://bot.whatismyipaddress.com";
 
@@ -86,4 +90,12 @@ async function login() {
 
 logger.level = config.loglevel;
 
-login();
+if (config.updatePeriod === 0) {
+    logger.info("hover-ddns: Running once");
+    update();
+    return;
+}
+
+logger.info("hover-ddns: Starting update every " + config.updatePeriod + " seconds.");
+update(); // Do it once now.
+const updater = setInterval(update, config.updatePeriod * 1000);

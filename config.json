@@ -1,14 +1,17 @@
 {
     "dnsId_comment": "Find it here: https://www.hover.com/api/domains/YOURDOMAIN.COM/dns",
-    "dnsId":"dns12345678",
+    "dnsId":"dns00000000",
 
     "username_comment": "Your Hover credentials",
-    "username": "userid",
+    "username": "user",
     "password": "12345",
 
     "loglevel-comment" : "trace, debug, info, warn, error, fatal",
     "loglevel": "info",
 
+    "logfile_comment": "Location of the logfile",
+    "logfile": "./hover-ddns.log",
+    
     "updatePeriod_comment": "seconds between updates, 0 for don't repeat", 
     "updatePeriod": 600      
 }
