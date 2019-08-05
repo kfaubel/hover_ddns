@@ -1,0 +1,22 @@
+{
+  "name": "hover_ddns",
+  "version": "1.0.0",
+  "description": "Utility to update Hover DNS enteries based on current (routable) \u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[Dexternal (routable) IP address.",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kfaubel/hover_ddns.git"
+  },
+  "author": "Ken Faubel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kfaubel/hover_ddns/issues"
+  },
+  "homepage": "https://github.com/kfaubel/hover_ddns#readme",
+  "dependencies": {
+    "axios": "^0.19.0"
+  }
+}
