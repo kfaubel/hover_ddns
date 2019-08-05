@@ -1,12 +1,13 @@
 const axios = require('axios');
+const config = require("./config.json");
 
 const dnsId = "dns19334064";
 
 async function login() {
     const url = "https://www.hover.com/api/login";
     const params = {
-        username: "kfaubel",
-        password: "uge4Divo",
+        username: config.username,
+        password: config.password,
         'Content-Type': "application/x-www-form-urlencoded"
     }
 
@@ -45,13 +46,13 @@ async function login() {
                     //console.log("domain.id: " + JSON.stringify(response.data.domains[domain].id, null, 4));
                     for (const entry of domain.entries) {
                         //console.log("entry: " + JSON.stringify(entry, null, 4));
-                        if (dnsId === entry.id) {
+                        if (entry.id === config.dnsId) {
                             if (myIP === entry.content) {
-                                console.log("DNS for " + dnsId + " is still: " + entry.content);
+                                console.log("DNS for " + config.dnsId + " is still: " + entry.content);
                             } else {
                                 console.log("entry: " + JSON.stringify(entry, null, 4));
-                                console.log("DNS for " + dnsId + " changed to: " + entry.content);
-                                const updateUrl = "https://www.hover.com/api/dns/" + dnsId;
+                                console.log("DNS for " + config.dnsId + " changed to: " + entry.content);
+                                const updateUrl = "https://www.hover.com/api/dns/" + config.dnsId;
 
 
                                 // https://www.hover.com/api/dns/dns3663904?content=64.98.145.30
