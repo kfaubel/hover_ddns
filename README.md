@@ -5,9 +5,12 @@ Adapted from the basic flow found here: https://gist.github.com/andybarilla/b0dd
 
 ## Installation
 ````
-npm install hover_ddns
+$ git clone https://github.com/kfaubel/hover_ddns.git
+$ cd hover_ddns
+$ npm install hover_ddns
 ````
 
+## Update the config file
 Edit the config.json file with your Hover credentials
 
 ## Run
@@ -18,7 +21,7 @@ sudo cd /home/pi/server/hover_ddns && npm start &
 Or from the command line in the node_ddns directory:
 
 ````
-npm start
+$ npm start
 ````
 
 
