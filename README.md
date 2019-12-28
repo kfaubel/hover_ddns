@@ -10,8 +10,22 @@ $ cd hover_ddns
 $ npm install hover_ddns
 ````
 
+## Get values you will need
+login to hover.com
+navigate to https://www.hover.com/api/domains/YOURDOMAIN.COM/dns
+Get the id value:
+````
+{
+    "succeeded": true,
+    "domains": [
+    {
+        "domain_name": "YOURDOMAIN.COM",
+        "id": "dom2724423",
+    ...
+````
+
 ## Update the config file
-Edit the config.json file with your Hover credentials
+Edit the config.json file with your ID, username and password
 
 ## Run
 This can be added to an /etc/rc.local file on a Linux system (Raspberry Pi) with a line like this:
