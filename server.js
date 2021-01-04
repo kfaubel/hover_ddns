@@ -11,7 +11,7 @@ log4js.configure({
     categories: { 
         default: { 
             appenders: ['out', 'file'], 
-            level: 'warn' 
+            level: config.loglevel 
         } 
     }
 });
@@ -54,20 +54,53 @@ async function update() {
         let currentIp = "";
 
         // Search all of the entry elements for our dns id ("dns12345678")
+        //
+        // response.data looks like:
+        // {
+        //     "succeeded": true,
+        //     "domains": [
+        //         {
+        //             "domain_name": "domain.com",
+        //             "id": "dom123456",
+        //             "active": true,
+        //             "entries": [
+        //                 {
+        //                     "id": "dns1234567",            <== this is the key we are after
+        //                     "name": "@",                   <== @ is the base domain name, * are all subdomains
+        //                     "type": "A",
+        //                     "content": "64.98.145.30",     <== this is the value we need
+        //                     "ttl": 900,
+        //                     "is_default": true,
+        //                     "can_revert": false
+        //                  },
+        //                  ... Aditional entries
+        //              ]
+        //         },
+        //         ... Aditional domains
+        //     ]
+        //            
+        // }
         for  (const domain of response.data.domains) {
+            logger.debug(`Checking domain: ${domain.domain_name}`);
             for (const entry of domain.entries) {
-                logger.debug("entry: " + JSON.stringify(entry, null, 4));
+                logger.debug(`  Checking entry: id: ${entry.id}, name: ${entry.name}, type: ${entry.type}`);
                 if (entry.id === config.dnsId) {
+                    logger.debug(`Found entry for ${entry.id}: ${JSON.stringify(entry, null, 4)}`);
                     currentIp = entry.content;                        
                 }                
             }
         }
 
+        if (currentIp === "") {
+            logger.error(`Unable to find entry for: ${config.dnsId}`);
+            return;
+        } 
+
         // Do we we need to update the address
         if (myIP === currentIp) {
             logger.debug("DNS for " + config.dnsId + " is still: " + currentIp);
             return;
-        }
+        } 
 
         logger.debug("DNS for " + config.dnsId + " was " + currentIp + " changing to: " + myIP); 
         
