@@ -20,7 +20,19 @@ Get the id value:
     "domains": [
     {
         "domain_name": "YOURDOMAIN.COM",
-        "id": "dom2724423",
+        "id": "dom123456",                      <== Not this id
+        "active": true,
+            "entries": [
+                {
+                    "id": "dns1234567",         <== This is the value we are looking for
+                    "name": "@",
+                    "type": "A",
+                    "content": "100.101.102.103",
+                    "ttl": 900,
+                    "is_default": true,
+                    "can_revert": false
+                },
+
     ...
 ````
 

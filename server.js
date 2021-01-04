@@ -102,7 +102,7 @@ async function update() {
             return;
         } 
 
-        logger.debug("DNS for " + config.dnsId + " was " + currentIp + " changing to: " + myIP); 
+        logger.info("DNS for " + config.dnsId + " was " + currentIp + " changing to: " + myIP); 
         
         // put the updated IP address to the Hover record.
         response = await axios.put(baseUrl + "dns/" + config.dnsId, "content=" + myIP, {
