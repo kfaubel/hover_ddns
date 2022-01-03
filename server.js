@@ -20,7 +20,7 @@ const logger = log4js.getLogger('hover-ddns');
 
 async function update() {
     const baseUrl    = "https://www.hover.com/api/";
-    const ipQueryUrl = "https://bot.whatismyipaddress.com";
+    const ipQueryUrl = "https://api.ipify.org"; //"https://bot.whatismyipaddress.com";
 
     const params = {
         username: config.username,
@@ -38,7 +38,8 @@ async function update() {
         const hoverauthCookie = cookieList[0];
         
         // Get our external IP address
-        response = await axios.post(ipQueryUrl);
+        logger.debug("GET ip Address: " + ipQueryUrl);
+        response = await axios.get(ipQueryUrl);
         const myIP = response.data;
         logger.debug("My IP: " + myIP);
 
