@@ -66,7 +66,7 @@ async function update() {
         //             "active": true,
         //             "entries": [
         //                 {
-        //                     "id": "dns1234567",            <== this is the key we are after
+        //                     "id": "dn0000000",            <== this is the key we are after
         //                     "name": "@",                   <== @ is the base domain name, * are all subdomains
         //                     "type": "A",
         //                     "content": "64.98.145.30",     <== this is the value we need
@@ -119,6 +119,7 @@ async function update() {
     }
     catch(error) {
         logger.error("Error: " + error);
+        logger.error(error.stack);
     }
 }
 
@@ -127,7 +128,7 @@ logger.level = config.loglevel;
 if (config.updatePeriod === 0) {
     logger.info("hover-ddns: Running once");
     update();
-    return;
+    process.exit(0);
 }
 
 logger.info("hover-ddns: Starting update every " + config.updatePeriod + " seconds.");
