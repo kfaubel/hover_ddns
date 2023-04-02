@@ -3,6 +3,12 @@ Simple applicaiton to update DNS setting with the current external (routable) IP
 
 Adapted from the basic flow found here: https://gist.github.com/andybarilla/b0dd93e71ff18303c059 . 
 
+Ref: 
+* https://captaincore.io/hover-coms-internal-api/ 
+* https://gist.github.com/dankrause/5585907
+
+**This is currently broken as of April 2023.  See: https://github.com/dschanoeh/hover-ddns/issues/18**
+
 ## Installation
 ````
 $ git clone https://github.com/kfaubel/hover_ddns.git
